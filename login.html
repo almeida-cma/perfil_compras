@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tela de Login</title>
+<style>
+  /* Estilos CSS para a página */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Tela de Login</h2>
+  <div class="form-group">
+    <label for="username">Nome de Usuário:</label>
+    <input type="text" id="username" name="username">
+  </div>
+  <div class="form-group">
+    <label for="password">Senha:</label>
+    <input type="password" id="password" name="password">
+  </div>
+  <button class="btn" onclick="login()">Login</button>
+</div>
+
+<script>
+  // Dados dos usuários e suas credenciais
+  var users = [
+    { username: 'usuario1', password: '123', perfil: 'premium' },
+    { username: 'usuario2', password: '456', perfil: 'normal' },
+    { username: 'usuario3', password: '789', perfil: 'vip' }
+  ];
+
+  // Função para autenticar o usuário
+  function login() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var authenticatedUser = users.find(user => user.username === username && user.password === password);
+    if (authenticatedUser) {
+      window.location.href = 'pagina_produtos.html?perfil=' + authenticatedUser.perfil;
+    } else {
+      alert('Nome de usuário ou senha incorretos!');
+    }
+  }
+</script>
+
+</body>
+</html>

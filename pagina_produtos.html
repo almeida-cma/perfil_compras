@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produtos Personalizados</title>
+<style>
+  /* Estilos CSS para a página */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  .main-content {
+    padding: 20px;
+    text-align: center;
+  }
+  .product {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Produtos Personalizados</h1>
+</div>
+
+<div class="main-content">
+  <p id="greetingMessage"></p>
+</div>
+
+<div class="main-content" id="products">
+  <!-- Aqui serão exibidos os produtos -->
+</div>
+
+<div class="main-content">
+  <p id="thankYouMessage"></p>
+  <a href="login.html" class="btn">Logoff</a>
+</div>
+
+<script>
+  // Função para obter o perfil do usuário da URL
+  function getUserProfileFromURL() {
+    var urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('perfil');
+  }
+
+  // Dados dos produtos de acordo com o perfil do usuário
+  var products = {
+    premium: [
+      { nome: 'Produto Premium 1', preco: 'R$ 99,99' },
+      { nome: 'Produto Premium 2', preco: 'R$ 149,99' }
+    ],
+    normal: [
+      { nome: 'Produto Normal 1', preco: 'R$ 49,99' },
+      { nome: 'Produto Normal 2', preco: 'R$ 79,99' }
+    ],
+    vip: [
+      { nome: 'Produto VIP 1', preco: 'R$ 199,99' },
+      { nome: 'Produto VIP 2', preco: 'R$ 249,99' }
+    ]
+  };
+
+  // Função para exibir os produtos de acordo com o perfil do usuário
+  function displayProducts(profile) {
+    var productsHTML = '';
+    var productsList = products[profile];
+    for (var i = 0; i < productsList.length; i++) {
+      var product = productsList[i];
+      productsHTML += '<div class="product"><h2>' + product.nome + '</h2><p>' + product.preco + '</p></div>';
+    }
+    document.getElementById('products').innerHTML = productsHTML;
+  }
+
+  // Função para exibir a saudação e agradecimento ao usuário
+  function displayGreetingAndThankYou(profile) {
+    var greetingMessage = '';
+    var thankYouMessage = '';
+    switch (profile) {
+      case 'premium':
+        greetingMessage = 'Olá Usuário Premium!';
+        thankYouMessage = 'Obrigado por escolher nossos produtos Premium!';
+        break;
+      case 'normal':
+        greetingMessage = 'Olá Usuário Normal!';
+        thankYouMessage = 'Obrigado por escolher nossos produtos!';
+        break;
+      case 'vip':
+        greetingMessage = 'Olá Usuário VIP!';
+        thankYouMessage = 'Obrigado por escolher nossos produtos VIP!';
+        break;
+      default:
+        greetingMessage = 'Olá Usuário!';
+        thankYouMessage = 'Obrigado por escolher nossos produtos!';
+    }
+    document.getElementById('greetingMessage').innerText = greetingMessage;
+    document.getElementById('thankYouMessage').innerText = thankYouMessage;
+  }
+
+  // Obtém o perfil do usuário da URL e exibe os produtos correspondentes e a saudação
+  var userProfile = getUserProfileFromURL();
+  if (userProfile) {
+    displayGreetingAndThankYou(userProfile);
+    displayProducts(userProfile);
+  } else {
+    alert('Perfil de usuário não encontrado na URL!');
+  }
+</script>
+
+</body>
+</html>
+
